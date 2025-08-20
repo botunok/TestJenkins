@@ -11,7 +11,7 @@ pipeline {
 
     options {
         // Автоматически очищать рабочую директорию после сборки
-        cleanupAfterBuild()
+        disableConcurrentBuilds()
         // Таймаут сборки (60 минут)
         timeout(time: 60, unit: 'MINUTES')
     }

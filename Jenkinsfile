@@ -67,7 +67,7 @@ pipeline {
                 // Останавливаем старый контейнер если он существует
                 sh "docker rm -f ${CONTAINER_NAME} || true"
                 // Запускаем новый контейнер
-                sh "docker run -d -p ${APP_PORT}:${APP_PORT} --name ${CONTAINER_NAME} ${DOCKER_IMAGE}:${DOCKER_TAG}"
+                sh "docker run -d -p ${SERVER_PORT}:${SERVER_PORT} --name ${CONTAINER_NAME} ${DOCKER_IMAGE}:${DOCKER_TAG}"
             }
         }
 
@@ -77,7 +77,7 @@ pipeline {
                 sleep time: 10, unit: 'SECONDS'
                 // Проверяем, что приложение работает
                 script {
-                    def response = sh(script: "curl -s -o /dev/null -w '%{http_code}' http://localhost:${APP_PORT}/test || echo 'Failed'", returnStdout: true).trim()
+                    def response = sh(script: "curl -s -o /dev/null -w '%{http_code}' http://localhost:${SERVER_PORT}/test || echo 'Failed'", returnStdout: true).trim()
                     if (response != "200") {
                         error "Application test failed with HTTP code: ${response}"
                     } else {

@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // Настройки окружения
-        DOCKER_IMAGE = "Mamaev/TestJenkins"
+        DOCKER_IMAGE = "mamaev/TestJenkins"
         DOCKER_TAG = "latest"
         CONTAINER_NAME = "TestJenkins"
         SERVER_PORT = "9090"

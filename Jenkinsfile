@@ -11,6 +11,7 @@ pipeline {
 
     options {
         // Автоматически очищать рабочую директорию после сборки
+        cleanWs()
         disableConcurrentBuilds()
         // Таймаут сборки (60 минут)
         timeout(time: 60, unit: 'MINUTES')
@@ -91,6 +92,7 @@ pipeline {
     post {
         // Действия после завершения пайплайна
         always {
+            cleanWs()
             // Очистка: останавливаем и удаляем контейнер
             sh "docker rm -f ${CONTAINER_NAME} || true"
             // Уведомление о завершении
